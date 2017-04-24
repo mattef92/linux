@@ -2,8 +2,7 @@
 
 # MySQL 
 
-##Slave Restart
-  Mysql Restart on Slave
+## Slave Restart
 
   STOP SLAVE;
   FLUSH TABLES;
@@ -21,32 +20,32 @@
   salt-call state.highstate test=True
 
 # Run upgrades from Salt Master on Minions 
-  * salt -C 'pillar.grain' pkg.list_upgrades dist_upgrade=false
-  * salt -C 'pillar.grain' pkg.upgrade
+  salt -C 'pillar.grain' pkg.list_upgrades dist_upgrade=false
+  salt -C 'pillar.grain' pkg.upgrade
 
 
 # Create a list of MySQL Processes to kill
-  * select concat('KILL ',id,';') from information_schema.processlist where state = 'checking permissions' and time > 1000 into outfile '/tmp/a.txt';
+  select concat('KILL ',id,';') from information_schema.processlist where state = 'checking permissions' and time > 1000 into outfile '/tmp/a.txt';
 
 
 # MegaCLI Commands 
 ## Controller Status and Configuration
-  * megacli -AdpAllInfo -aAll
+  megacli -AdpAllInfo -aAll
 ## Status of a logical drive
-  * megacli -LDInfo -L0 -a0
+  megacli -LDInfo -L0 -a0
 ## Output of the hard drive information on a controller
-  * megacli -PDList -a0
+  megacli -PDList -a0
 
 
 # Usage Percona Toolkit commands
-  * pt-heartbeat -D percona --monitor -h $HOSTNAME
-  * pt-duplicate-keys -d $DATABASE 
-  * pt-table-sync
-  * pt-table-sync --execute --sync-to-master slave1
+  pt-heartbeat -D percona --monitor -h $HOSTNAME
+  pt-duplicate-keys -d $DATABASE 
+  pt-table-sync
+  pt-table-sync --execute --sync-to-master slave1
 
 
 # TCP Connections sorted by state
-  * netstat -nat | awk '{print $6}' | sort | uniq -c | sort -n
+  netstat -nat | awk '{print $6}' | sort | uniq -c | sort -n
 
 
 # Sample of MySQL Dump Usage
