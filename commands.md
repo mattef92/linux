@@ -62,6 +62,14 @@
 # Delete lots of files
   perl -e 'for(<*>){((stat)[9]<(unlink))}'
 
+# Get rid of failed apt-get install process
+
+  dpkg --get-selections > install_list
+  -> adjust the package from install to deinstall or remove it completely out of the list
+  dpkg --clear-selections
+  dpkg --set-selections < install_list
+  apt-get -u dselect-upgrade
+
 # API Elasticsearch
 ## Get all Indices from Elasticsearch
   curl 'localhost:9200/_cat/indices?v'
